@@ -1,0 +1,742 @@
+{
+  "version": 2,
+  "run": {
+    "depth": "default",
+    "mode": "bench-only",
+    "label": "GLM-5.3-Flash Q4_K GGUF (ds4) | mlx-serve 26.9.7-dev 933566c | M5 Ultra 256GB | max-concurrent 4 (ds4 forces 1)",
+    "startedAt": "2026-09-30T07:07:07.347Z",
+    "phases": {
+      "coverage": {
+        "status": "measured"
+      },
+      "conformance": {
+        "status": "not-run",
+        "reason": "benchmark-only run"
+      },
+      "capability": {
+        "status": "not-run",
+        "reason": "benchmark-only run"
+      },
+      "agentic": {
+        "status": "not-run",
+        "reason": "benchmark-only run"
+      },
+      "fidelity": {
+        "status": "not-run",
+        "reason": "benchmark-only run"
+      },
+      "performance": {
+        "status": "measured"
+      },
+      "reasoning": {
+        "status": "not-run",
+        "reason": "eval not requested"
+      }
+    },
+    "budget": {
+      "exhausted": false
+    }
+  },
+  "target": {
+    "baseUrl": "http://127.0.0.1:11234/v1",
+    "model": "GLM-5.3-Flash-Q4_K",
+    "engine": "mlx-serve",
+    "engineSettings": {
+      "version": "26.9.7-dev",
+      "engine": "ds4",
+      "kv_quant": "off",
+      "kv_attn_mode": "auto",
+      "decode_attn_quant": false,
+      "prefill_chunk": 0,
+      "mtp": {
+        "loaded": true,
+        "default_on": true,
+        "acceptance": "exact",
+        "acceptance_param": null,
+        "greedy_tail": false,
+        "depth": 3,
+        "adaptive": false,
+        "max_ctx": 0
+      },
+      "drafter": "none",
+      "pld": {
+        "default_on": false,
+        "draft_len": 5,
+        "key_len": 3
+      },
+      "max_concurrent": 1,
+      "prefill_decode_share": 0,
+      "prefix_cache": {
+        "mem_bytes": 2147483648,
+        "disk_bytes": 0
+      },
+      "ctx": 262144,
+      "model_max_ctx": 262144
+    }
+  },
+  "machine": {
+    "platform": "darwin",
+    "arch": "arm64",
+    "cpu": "Apple M5 Ultra",
+    "memGB": 256
+  },
+  "coverage": {
+    "byTier": [
+      {
+        "tier": "core",
+        "supported": 2,
+        "total": 2,
+        "pct": 100,
+        "missing": [],
+        "unprobed": [
+          "streaming + SSE framing",
+          "tool calling",
+          "JSON mode",
+          "usage tokens",
+          "finish reasons",
+          "error codes",
+          "stop + max_tokens"
+        ]
+      },
+      {
+        "tier": "extended",
+        "supported": 4,
+        "total": 5,
+        "pct": 80,
+        "missing": [
+          "messages/count_tokens"
+        ],
+        "unprobed": [
+          "structured outputs",
+          "parallel tool calls",
+          "vision",
+          "logprobs",
+          "reasoning items",
+          "reasoning history round-trip",
+          "streamed usage",
+          "seed determinism",
+          "top_p sampling",
+          "max_tokens legacy alias"
+        ]
+      },
+      {
+        "tier": "frontier",
+        "supported": 3,
+        "total": 4,
+        "pct": 75,
+        "missing": [
+          "audio/transcriptions"
+        ],
+        "unprobed": [
+          "MCP tools",
+          "n>1 choices",
+          "rate limiting",
+          "prompt caching",
+          "previous_response_id chaining",
+          "background responses"
+        ]
+      }
+    ],
+    "credits": [
+      {
+        "id": "ollama-native-chat",
+        "label": "Ollama-compatible /api/chat"
+      },
+      {
+        "id": "ollama-native-tags",
+        "label": "Ollama-compatible /api/tags"
+      }
+    ],
+    "entries": [
+      {
+        "id": "models",
+        "label": "/v1/models",
+        "kind": "surface",
+        "tier": "core",
+        "supported": true
+      },
+      {
+        "id": "chat",
+        "label": "chat/completions",
+        "kind": "surface",
+        "tier": "core",
+        "supported": true
+      },
+      {
+        "id": "responses",
+        "label": "responses",
+        "kind": "surface",
+        "tier": "extended",
+        "supported": true
+      },
+      {
+        "id": "messages",
+        "label": "messages",
+        "kind": "surface",
+        "tier": "extended",
+        "supported": true
+      },
+      {
+        "id": "count-tokens",
+        "label": "messages/count_tokens",
+        "kind": "surface",
+        "tier": "extended",
+        "supported": false,
+        "detail": "not implemented"
+      },
+      {
+        "id": "embeddings",
+        "label": "embeddings",
+        "kind": "surface",
+        "tier": "extended",
+        "supported": true
+      },
+      {
+        "id": "completions",
+        "label": "completions (legacy)",
+        "kind": "surface",
+        "tier": "extended",
+        "supported": true
+      },
+      {
+        "id": "images",
+        "label": "images/generations",
+        "kind": "surface",
+        "tier": "frontier",
+        "supported": true
+      },
+      {
+        "id": "images-edit",
+        "label": "images/edits",
+        "kind": "surface",
+        "tier": "frontier",
+        "supported": true
+      },
+      {
+        "id": "audio-speech",
+        "label": "audio/speech",
+        "kind": "surface",
+        "tier": "frontier",
+        "supported": true
+      },
+      {
+        "id": "audio-transcriptions",
+        "label": "audio/transcriptions",
+        "kind": "surface",
+        "tier": "frontier",
+        "supported": false,
+        "detail": "not implemented"
+      },
+      {
+        "id": "streaming",
+        "label": "streaming + SSE framing",
+        "kind": "feature",
+        "tier": "core",
+        "supported": false,
+        "probed": false
+      },
+      {
+        "id": "tools",
+        "label": "tool calling",
+        "kind": "feature",
+        "tier": "core",
+        "supported": false,
+        "probed": false
+      },
+      {
+        "id": "json-mode",
+        "label": "JSON mode",
+        "kind": "feature",
+        "tier": "core",
+        "supported": false,
+        "probed": false
+      },
+      {
+        "id": "usage",
+        "label": "usage tokens",
+        "kind": "feature",
+        "tier": "core",
+        "supported": false,
+        "probed": false
+      },
+      {
+        "id": "finish-reasons",
+        "label": "finish reasons",
+        "kind": "feature",
+        "tier": "core",
+        "supported": false,
+        "probed": false
+      },
+      {
+        "id": "errors",
+        "label": "error codes",
+        "kind": "feature",
+        "tier": "core",
+        "supported": false,
+        "probed": false
+      },
+      {
+        "id": "limits",
+        "label": "stop + max_tokens",
+        "kind": "feature",
+        "tier": "core",
+        "supported": false,
+        "probed": false
+      },
+      {
+        "id": "structured-outputs",
+        "label": "structured outputs",
+        "kind": "feature",
+        "tier": "extended",
+        "supported": false,
+        "probed": false
+      },
+      {
+        "id": "parallel-tools",
+        "label": "parallel tool calls",
+        "kind": "feature",
+        "tier": "extended",
+        "supported": false,
+        "probed": false
+      },
+      {
+        "id": "vision",
+        "label": "vision",
+        "kind": "feature",
+        "tier": "extended",
+        "supported": false,
+        "probed": false
+      },
+      {
+        "id": "logprobs",
+        "label": "logprobs",
+        "kind": "feature",
+        "tier": "extended",
+        "supported": false,
+        "probed": false
+      },
+      {
+        "id": "reasoning",
+        "label": "reasoning items",
+        "kind": "feature",
+        "tier": "extended",
+        "supported": false,
+        "probed": false
+      },
+      {
+        "id": "reasoning-roundtrip",
+        "label": "reasoning history round-trip",
+        "kind": "feature",
+        "tier": "extended",
+        "supported": false,
+        "probed": false
+      },
+      {
+        "id": "stream-usage",
+        "label": "streamed usage",
+        "kind": "feature",
+        "tier": "extended",
+        "supported": false,
+        "probed": false
+      },
+      {
+        "id": "seed",
+        "label": "seed determinism",
+        "kind": "feature",
+        "tier": "extended",
+        "supported": false,
+        "probed": false
+      },
+      {
+        "id": "sampling",
+        "label": "top_p sampling",
+        "kind": "feature",
+        "tier": "extended",
+        "supported": false,
+        "probed": false
+      },
+      {
+        "id": "max-tokens-alias",
+        "label": "max_tokens legacy alias",
+        "kind": "feature",
+        "tier": "extended",
+        "supported": false,
+        "probed": false
+      },
+      {
+        "id": "mcp-tools",
+        "label": "MCP tools",
+        "kind": "feature",
+        "tier": "frontier",
+        "supported": false,
+        "probed": false
+      },
+      {
+        "id": "n-choices",
+        "label": "n>1 choices",
+        "kind": "feature",
+        "tier": "frontier",
+        "supported": false,
+        "probed": false
+      },
+      {
+        "id": "rate-limiting",
+        "label": "rate limiting",
+        "kind": "feature",
+        "tier": "frontier",
+        "supported": false,
+        "probed": false
+      },
+      {
+        "id": "prompt-caching",
+        "label": "prompt caching",
+        "kind": "feature",
+        "tier": "frontier",
+        "supported": false,
+        "probed": false
+      },
+      {
+        "id": "previous-response-id",
+        "label": "previous_response_id chaining",
+        "kind": "feature",
+        "tier": "frontier",
+        "supported": false,
+        "probed": false
+      },
+      {
+        "id": "background",
+        "label": "background responses",
+        "kind": "feature",
+        "tier": "frontier",
+        "supported": false,
+        "probed": false
+      }
+    ]
+  },
+  "conformance": {
+    "pct": 0,
+    "passed": 0,
+    "total": 0,
+    "bySurface": [],
+    "inconclusive": [],
+    "warnings": [],
+    "nits": [],
+    "results": []
+  },
+  "capability": {
+    "pct": 0,
+    "verdict": "below-floor",
+    "categories": [],
+    "weakCategories": [],
+    "unmeasured": [
+      "tool-selection",
+      "tool-restraint",
+      "tool-args",
+      "multiturn",
+      "instructions",
+      "json-discipline",
+      "reasoning"
+    ],
+    "evals": []
+  },
+  "bench": {
+    "decodeTokPerSec": {
+      "median": 35.8,
+      "min": 35.6,
+      "max": 37.5,
+      "samples": [
+        35.6,
+        35.8,
+        37.5
+      ]
+    },
+    "streamCaveat": null,
+    "decodeLengthNote": "decode length forced to 192 tokens (ignore_eos + min_tokens) — decode and drift figures compare equal work",
+    "samplingNote": null,
+    "runsNote": "custom setup: rungs 2k, 4k, 8k, 16k, 32k, 64k, 128k, 250k — not comparable to default runs",
+    "reasoningNote": null,
+    "ttftMs": {
+      "median": 427,
+      "min": 427,
+      "max": 427,
+      "samples": [
+        427,
+        427,
+        427
+      ]
+    },
+    "prefillTokPerSec": {
+      "median": 438.8,
+      "min": 438.8,
+      "max": 439.2,
+      "samples": [
+        438.8,
+        438.8,
+        439.2
+      ]
+    },
+    "prefillPromptTokens": 9368,
+    "speculative": {
+      "predictableTokPerSec": 41,
+      "novelTokPerSec": 26.2,
+      "ratio": 1.57,
+      "verdict": "effective",
+      "tokensPerStep": 1.96,
+      "tokensPerStepNote": null,
+      "reasoningCaveat": true,
+      "offScript": 0
+    },
+    "prefixCache": {
+      "coldTtftMs": 3050,
+      "warmTtftMs": 3048,
+      "speedup": 1,
+      "cachedTokens": 1411,
+      "promptTokens": 1411,
+      "verdict": "none"
+    },
+    "batching": {
+      "streams": 4,
+      "singleTokPerSec": 28.7,
+      "aggregateTokPerSec": 26.7,
+      "efficiency": 0.23,
+      "worstTtftMs": 11079,
+      "verdict": "serialized"
+    },
+    "loadDrift": {
+      "firstTokPerSec": 35.8,
+      "lastTokPerSec": 35.9,
+      "driftPct": 0.3,
+      "elapsedMs": 8541337,
+      "verdict": "steady"
+    },
+    "machine": {
+      "platform": "darwin",
+      "arch": "arm64",
+      "cpu": "Apple M5 Ultra",
+      "memGB": 256
+    },
+    "contextScaling": [
+      {
+        "targetTokens": 2048,
+        "inputTokens": 2096,
+        "decodeTokPerSec": 26.4,
+        "ttftMs": 4452,
+        "prefillTokPerSec": 471,
+        "speculative": {
+          "predictableTokPerSec": 36.5,
+          "predictableTokensPerStep": 2,
+          "ratio": 1.38,
+          "verdict": "effective",
+          "tokensPerStep": 1.68,
+          "note": "answer never used RETRY_BUDGET_MS — context may be unread"
+        },
+        "runs": 1,
+        "note": null,
+        "concurrent": {
+          "streams": 4,
+          "singleTokPerSec": 16.5,
+          "aggregateTokPerSec": 16.9,
+          "efficiency": 0.26,
+          "worstTtftMs": 38726,
+          "verdict": "serialized",
+          "perStreamTokPerSec": 27.5,
+          "note": null
+        }
+      },
+      {
+        "targetTokens": 4096,
+        "inputTokens": 4087,
+        "decodeTokPerSec": 30.2,
+        "ttftMs": 9014,
+        "prefillTokPerSec": 453,
+        "speculative": {
+          "predictableTokPerSec": 36.3,
+          "predictableTokensPerStep": 2,
+          "ratio": 1.2,
+          "verdict": "marginal",
+          "tokensPerStep": 1.81,
+          "note": "answer never used RETRY_BUDGET_MS — context may be unread"
+        },
+        "runs": 1,
+        "note": null,
+        "concurrent": {
+          "streams": 4,
+          "singleTokPerSec": 12.5,
+          "aggregateTokPerSec": 12.3,
+          "efficiency": 0.25,
+          "worstTtftMs": 56127,
+          "verdict": "serialized",
+          "perStreamTokPerSec": 29,
+          "note": null
+        }
+      },
+      {
+        "targetTokens": 8192,
+        "inputTokens": 8272,
+        "decodeTokPerSec": 27.6,
+        "ttftMs": 19120,
+        "prefillTokPerSec": 433,
+        "speculative": {
+          "predictableTokPerSec": 36,
+          "predictableTokensPerStep": 2,
+          "ratio": 1.31,
+          "verdict": "effective",
+          "tokensPerStep": 1.75,
+          "note": "answer never used RETRY_BUDGET_MS — context may be unread"
+        },
+        "runs": 1,
+        "note": null,
+        "concurrent": {
+          "streams": 4,
+          "singleTokPerSec": 7.4,
+          "aggregateTokPerSec": 7.3,
+          "efficiency": 0.25,
+          "worstTtftMs": 97998,
+          "verdict": "serialized",
+          "perStreamTokPerSec": 26.9,
+          "note": null
+        }
+      },
+      {
+        "targetTokens": 16384,
+        "inputTokens": 16311,
+        "decodeTokPerSec": 26.9,
+        "ttftMs": 38247,
+        "prefillTokPerSec": 426,
+        "speculative": {
+          "predictableTokPerSec": 35.4,
+          "predictableTokensPerStep": 2,
+          "ratio": 1.32,
+          "verdict": "effective",
+          "tokensPerStep": 1.73,
+          "note": "answer never used RETRY_BUDGET_MS — context may be unread"
+        },
+        "runs": 1,
+        "note": null,
+        "concurrent": {
+          "streams": 4,
+          "singleTokPerSec": 4.2,
+          "aggregateTokPerSec": 4.2,
+          "efficiency": 0.25,
+          "worstTtftMs": 174300,
+          "verdict": "serialized",
+          "perStreamTokPerSec": 26.4,
+          "note": null
+        }
+      },
+      {
+        "targetTokens": 32768,
+        "inputTokens": 32766,
+        "decodeTokPerSec": 27.1,
+        "ttftMs": 78322,
+        "prefillTokPerSec": 418,
+        "speculative": {
+          "predictableTokPerSec": 34.2,
+          "predictableTokensPerStep": 2,
+          "ratio": 1.26,
+          "verdict": "effective",
+          "tokensPerStep": 1.76,
+          "note": "answer never used RETRY_BUDGET_MS — context may be unread"
+        },
+        "runs": 1,
+        "note": null,
+        "concurrent": {
+          "streams": 4,
+          "singleTokPerSec": 2.3,
+          "aggregateTokPerSec": 2.3,
+          "efficiency": 0.25,
+          "worstTtftMs": 334340,
+          "verdict": "serialized",
+          "perStreamTokPerSec": 27.2,
+          "note": null
+        }
+      },
+      {
+        "targetTokens": 65536,
+        "inputTokens": 65668,
+        "decodeTokPerSec": 24.4,
+        "ttftMs": 160541,
+        "prefillTokPerSec": 409,
+        "speculative": {
+          "predictableTokPerSec": 32.3,
+          "predictableTokensPerStep": 2,
+          "ratio": 1.32,
+          "verdict": "effective",
+          "tokensPerStep": 1.71,
+          "note": "answer never used RETRY_BUDGET_MS — context may be unread"
+        },
+        "runs": 1,
+        "note": null,
+        "concurrent": {
+          "streams": 4,
+          "singleTokPerSec": 1.1,
+          "aggregateTokPerSec": 1.1,
+          "efficiency": 0.25,
+          "worstTtftMs": 665737,
+          "verdict": "serialized",
+          "perStreamTokPerSec": 24.8,
+          "note": null
+        }
+      },
+      {
+        "targetTokens": 131072,
+        "inputTokens": 131083,
+        "decodeTokPerSec": 23.3,
+        "ttftMs": 332813,
+        "prefillTokPerSec": 394,
+        "speculative": {
+          "predictableTokPerSec": 28.8,
+          "predictableTokensPerStep": 2,
+          "ratio": 1.24,
+          "verdict": "marginal",
+          "tokensPerStep": 1.76,
+          "note": "answer never used RETRY_BUDGET_MS — context may be unread"
+        },
+        "runs": 1,
+        "note": null,
+        "concurrent": {
+          "streams": 4,
+          "singleTokPerSec": 0.6,
+          "aggregateTokPerSec": 0.6,
+          "efficiency": 0.25,
+          "worstTtftMs": 1355092,
+          "verdict": "serialized",
+          "perStreamTokPerSec": 24,
+          "note": null
+        }
+      },
+      {
+        "targetTokens": 256000,
+        "inputTokens": 255834,
+        "decodeTokPerSec": 19,
+        "ttftMs": 692323,
+        "prefillTokPerSec": 370,
+        "speculative": {
+          "predictableTokPerSec": 24.5,
+          "predictableTokensPerStep": 2,
+          "ratio": 1.29,
+          "verdict": "effective",
+          "tokensPerStep": 1.71,
+          "note": "answer never used RETRY_BUDGET_MS — context may be unread"
+        },
+        "runs": 1,
+        "note": null,
+        "concurrent": {
+          "streams": 4,
+          "singleTokPerSec": 0.3,
+          "aggregateTokPerSec": 0.3,
+          "efficiency": 0.25,
+          "worstTtftMs": 2797621,
+          "verdict": "serialized",
+          "perStreamTokPerSec": 20,
+          "note": null
+        }
+      }
+    ]
+  },
+  "usage": {
+    "inputTokens": 3139258,
+    "outputTokens": 13329
+  },
+  "durationMs": 8603192
+}

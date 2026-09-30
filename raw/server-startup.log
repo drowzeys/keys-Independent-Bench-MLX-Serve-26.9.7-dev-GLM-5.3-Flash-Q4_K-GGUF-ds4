@@ -1,0 +1,417 @@
+[mem] MLX buffer-pool cap 8192 MB (was 249036 MB)
+Logging to ~/.mlx-serve/logs/mlx-serve-11234.log (rotates at 32 MB)
+[gguf] engine: ds4 (arch=glm5-next, ds4-lora=false, ds4-unloadable=false)
+mlx-serve 26.9.7-dev (ds4 engine, GGUF backend)
+[args] model: ~/.mlx-serve/models/antirez/glm-5.3-flash-gguf/GLM-5.3-Flash-Q4_K.gguf
+[args] serve: 127.0.0.1:11234, ctx-size=262144
+[registry] max_resident_models=3, max_resident_mem=unlimited
+[ds4] opening engine: ~/.mlx-serve/models/antirez/glm-5.3-flash-gguf/GLM-5.3-Flash-Q4_K.gguf
+[ds4] staged 26 Metal kernel sources at ~/.mlx-serve/ds4-metal/1d5932cf4868fa00b9399323625ed8d6
+[ds4] embedded MTP head armed
+ds4: warming mapped tensor pages: 177.76 GiB
+ds4: warmed tensor pages in 11.799s (checksum=1461691993)
+ds4: Metal device Apple M5 Ultra, 256.00 GiB RAM
+ds4: Metal 4 tensor API enabled for Tensor kernels
+ds4: drift-patch flags hc_stable=on norm_unify=on kv_raw_f32=off rope_exp2_log2=off math_safe=off tensor_matmul=on
+ds4: Metal model views created in 5.022 ms, residency requested in 941.808 ms, warmup 4.597 ms (mapped 182024.03 MiB from offset 9.07 MiB)
+ds4: Metal mapped mmaped model as 2 overlapping shared buffers
+ds4: metal backend initialized for graph diagnostics
+[ds4] engine ready (EOS=154820, has_mtp=false, draft_tokens=2)
+Model ready (loaded on inference thread).
+Hot prefix cache: requested capacity=32 but disabled by scheduler
+Concurrency: --max-concurrent=1, batched decode on
+Context size: 262144 tokens (manual)
+Request timeout: 300s
+Model context length: 262144 tokens
+Reasoning budget: unlimited
+
+Server listening on http://127.0.0.1:11234
+  GET  /
+  GET  /health
+  GET  /props
+  GET  /v1/models
+  POST /v1/chat/completions
+  POST /v1/completions
+  POST /v1/embeddings
+  POST /v1/decisions (Laya, Kev)
+  POST /v1/messages (Anthropic)
+  POST /v1/responses (OpenAI Responses)
+  POST /v1/responses/compact
+  GET  /v1/responses/{id}
+  DEL  /v1/responses/{id}
+  POST /tokenize
+  POST /detokenize
+
+RSS: 177.8G  Mem: 84%  CPU: 13%  GPU: 0%
+POST /v1/chat/completions (1 msgs, max_tokens=40, temp=1.00, top_p=1.00, top_k=0, stream=false, thinking=false, sys=0b, user=18b, tools=0b, tool_msgs=0) 
+  > "Say hi in 5 words."
+  prompt=13 tokens, max_gen=40, ctx=262144
+ds4: GLM session ctx=262144 (model max=1048576); prefill/work cap=4096; dense attention limit=2051
+ds4: GLM graph using compact DSA KV only; expanded full-attention KV cache is skipped
+ds4: GLM graph allocating compact DSA cache: rows=262144 logical_ctx=262144 kv_layers=45 indexer_layers=11 f16 2.92 GiB
+ds4: GLM compact indexed prefill chunk=2048 score_rows=1024 score_scratch=256.00 MiB
+  <- 13+40 tokens (1514ms) [prefill: 64.0 tok/s, decode: 31.3 tok/s] [length]
+POST /v1/chat/completions -> 400 (missing messages)
+POST /v1/completions -> 400 (missing prompt)
+POST /api/chat -> 400 (invalid request)
+POST /v1/chat/completions (1 msgs, max_tokens=512, temp=0.00, top_p=1.00, top_k=0, stream=false, thinking=false, sys=0b, user=42b, tools=0b, tool_msgs=0) 
+  > "What is 2 + 2? Reply with just the number."
+  prompt=20 tokens, max_gen=512, ctx=262144
+  <- 20+512 tokens (19259ms) [prefill: 62.4 tok/s (3 cached / 20 total), decode: 27.0 tok/s] [length]
+POST /v1/chat/completions (1 msgs, max_tokens=512, temp=0.00, top_p=1.00, top_k=0, stream=false, thinking=true, sys=0b, user=42b, tools=0b, tool_msgs=0) 
+  > "What is 2 + 2? Reply with just the number."
+  prompt=19 tokens, max_gen=512, ctx=262144
+  <- 19+512 tokens (14569ms) [prefill: 0.0 tok/s (19 cached / 19 total), decode: 35.6 tok/s] [length]
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=235b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-0] Write a TypeScript function `retryWithBackoff<T>(fn, options)..."
+  prompt=59 tokens, max_gen=192, ctx=262144
+  <- 59+192 tokens streamed [prefill: 133.5 tok/s (3 cached / 59 total), decode: 38.1 tok/s] [length]
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=235b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-1] Write a TypeScript function `retryWithBackoff<T>(fn, options)..."
+  prompt=59 tokens, max_gen=192, ctx=262144
+  <- 59+192 tokens streamed [prefill: 138.5 tok/s (10 cached / 59 total), decode: 37.1 tok/s] [length]
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=235b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-2] Write a TypeScript function `retryWithBackoff<T>(fn, options)..."
+  prompt=59 tokens, max_gen=192, ctx=262144
+  <- 59+192 tokens streamed [prefill: 138.8 tok/s (10 cached / 59 total), decode: 35.5 tok/s] [length]
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=235b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-3] Write a TypeScript function `retryWithBackoff<T>(fn, options)..."
+  prompt=59 tokens, max_gen=192, ctx=262144
+  <- 59+192 tokens streamed [prefill: 139.1 tok/s (10 cached / 59 total), decode: 35.7 tok/s] [length]
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=235b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-4] Write a TypeScript function `retryWithBackoff<T>(fn, options)..."
+  prompt=59 tokens, max_gen=192, ctx=262144
+  <- 59+192 tokens streamed [prefill: 138.8 tok/s (10 cached / 59 total), decode: 37.4 tok/s] [length]
+POST /v1/chat/completions (1 msgs, max_tokens=8, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=41010b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-5] [0] The archive records the following entry. [1] The archive ..."
+  prompt=9368 tokens, max_gen=8, ctx=262144
+  <- 9368+8 tokens streamed [prefill: 436.9 tok/s (10 cached / 9368 total), decode: 22.8 tok/s] [length]
+POST /v1/chat/completions (1 msgs, max_tokens=8, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=41010b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-6] [0] The archive records the following entry. [1] The archive ..."
+  prompt=9368 tokens, max_gen=8, ctx=262144
+  <- 9368+8 tokens streamed [prefill: 440.9 tok/s (10 cached / 9368 total), decode: 19.9 tok/s] [length]
+POST /v1/chat/completions (1 msgs, max_tokens=8, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=41010b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-7] [0] The archive records the following entry. [1] The archive ..."
+  prompt=9368 tokens, max_gen=8, ctx=262144
+  <- 9368+8 tokens streamed [prefill: 440.9 tok/s (10 cached / 9368 total), decode: 17.0 tok/s] [length]
+POST /v1/chat/completions (1 msgs, max_tokens=8, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=41010b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-8] [0] The archive records the following entry. [1] The archive ..."
+  prompt=9368 tokens, max_gen=8, ctx=262144
+  <- 9368+8 tokens streamed [prefill: 441.3 tok/s (10 cached / 9368 total), decode: 19.9 tok/s] [length]
+POST /v1/chat/completions (2 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=79b, user=1164b, tools=0b, tool_msgs=0) 
+  > "The old lighthouse stood at the edge of the rocky cliff, its white paint weather..."
+  prompt=272 tokens, max_gen=192, ctx=262144
+  <- 272+192 tokens streamed [prefill: 239.5 tok/s (2 cached / 272 total), decode: 40.2 tok/s] [length]
+POST /v1/chat/completions (2 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=79b, user=1164b, tools=0b, tool_msgs=0) 
+  > "The old lighthouse stood at the edge of the rocky cliff, its white paint weather..."
+  prompt=271 tokens, max_gen=192, ctx=262144
+  <- 271+192 tokens streamed [prefill: 238.9 tok/s (9 cached / 271 total), decode: 41.4 tok/s] [length]
+POST /v1/chat/completions (2 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=79b, user=1164b, tools=0b, tool_msgs=0) 
+  > "The old lighthouse stood at the edge of the rocky cliff, its white paint weather..."
+  prompt=271 tokens, max_gen=192, ctx=262144
+  <- 271+192 tokens streamed [prefill: 239.1 tok/s (9 cached / 271 total), decode: 40.5 tok/s] [length]
+POST /v1/chat/completions (2 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=79b, user=1164b, tools=0b, tool_msgs=0) 
+  > "The old lighthouse stood at the edge of the rocky cliff, its white paint weather..."
+  prompt=271 tokens, max_gen=192, ctx=262144
+  <- 271+192 tokens streamed [prefill: 238.8 tok/s (9 cached / 271 total), decode: 40.5 tok/s] [length]
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=115b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-d] Invent an original, surprising paragraph of stream-of-conscio..."
+  prompt=30 tokens, max_gen=192, ctx=262144
+  <- 30+192 tokens streamed [prefill: 119.9 tok/s (2 cached / 30 total), decode: 27.5 tok/s] [length]
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=115b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-e] Invent an original, surprising paragraph of stream-of-conscio..."
+  prompt=30 tokens, max_gen=192, ctx=262144
+  <- 30+192 tokens streamed [prefill: 90.0 tok/s (9 cached / 30 total), decode: 26.0 tok/s] [length]
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=115b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-f] Invent an original, surprising paragraph of stream-of-conscio..."
+  prompt=30 tokens, max_gen=192, ctx=262144
+  <- 30+192 tokens streamed [prefill: 89.9 tok/s (9 cached / 30 total), decode: 26.0 tok/s] [length]
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=115b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-g] Invent an original, surprising paragraph of stream-of-conscio..."
+  prompt=30 tokens, max_gen=192, ctx=262144
+  <- 30+192 tokens streamed [prefill: 90.3 tok/s (9 cached / 30 total), decode: 28.2 tok/s] [length]
+POST /v1/chat/completions (1 msgs, max_tokens=8, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=6194b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-h] [0] Operations handbook, section on shift handover. [1] Opera..."
+  prompt=1411 tokens, max_gen=8, ctx=262144
+  <- 1411+8 tokens streamed [prefill: 473.0 tok/s (9 cached / 1411 total), decode: 30.4 tok/s] [length]
+POST /v1/chat/completions (1 msgs, max_tokens=8, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=6194b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-h] [0] Operations handbook, section on shift handover. [1] Opera..."
+  prompt=1411 tokens, max_gen=8, ctx=262144
+  <- 1411+8 tokens streamed [prefill: 0.0 tok/s (1411 cached / 1411 total), decode: 30.5 tok/s] [length]
+POST /v1/chat/completions (1 msgs, max_tokens=96, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=141b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-i] Write a short descriptive paragraph. Subject number 0: a harb..."
+  prompt=42 tokens, max_gen=96, ctx=262144
+  <- 42+96 tokens streamed [prefill: 114.7 tok/s (9 cached / 42 total), decode: 31.4 tok/s] [length]
+POST /v1/chat/completions (1 msgs, max_tokens=96, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=141b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-j] Write a short descriptive paragraph. Subject number 1: a harb..."
+  prompt=42 tokens, max_gen=96, ctx=262144
+POST /v1/chat/completions (1 msgs, max_tokens=96, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=141b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-k] Write a short descriptive paragraph. Subject number 2: a harb..."
+  prompt=42 tokens, max_gen=96, ctx=262144
+POST /v1/chat/completions (1 msgs, max_tokens=96, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=141b, tools=0b, tool_msgs=0) 
+POST /v1/chat/completions (1 msgs, max_tokens=96, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=141b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-l] Write a short descriptive paragraph. Subject number 3: a harb..."
+  prompt=42 tokens, max_gen=96, ctx=262144
+  > "[probe munririq-m] Write a short descriptive paragraph. Subject number 4: a harb..."
+  prompt=42 tokens, max_gen=96, ctx=262144
+  <- 42+96 tokens streamed [prefill: 114.1 tok/s (9 cached / 42 total), decode: 31.7 tok/s] [length]
+  <- 42+96 tokens streamed [prefill: 114.7 tok/s (9 cached / 42 total), decode: 30.0 tok/s] [length]
+  <- 42+96 tokens streamed [prefill: 114.6 tok/s (9 cached / 42 total), decode: 26.7 tok/s] [length]
+  <- 42+96 tokens streamed [prefill: 114.3 tok/s (9 cached / 42 total), decode: 28.3 tok/s] [length]
+POST /v1/chat/completions (1 msgs, max_tokens=1, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=2462b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-n] // src/order/resolve.ts
+import { Clock } from "../runtime/clo..."
+  prompt=626 tokens, max_gen=1, ctx=262144
+  <- 626+1 tokens streamed [prefill: 362.5 tok/s (9 cached / 626 total), decode: 30.9 tok/s] [length]
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=8136b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-o] // src/order/resolve.ts
+import { Clock } from "../runtime/clo..."
+  prompt=2096 tokens, max_gen=192, ctx=262144
+  <- 2096+192 tokens streamed [prefill: 478.7 tok/s (9 cached / 2096 total), decode: 26.4 tok/s] [length]
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=7962b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-o] // src/order/resolve.ts
+import { Clock } from "../runtime/clo..."
+  prompt=2061 tokens, max_gen=192, ctx=262144
+  <- 2061+192 tokens streamed [prefill: 6.0 tok/s (2036 cached / 2061 total), decode: 36.8 tok/s] [length]
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=8136b, tools=0b, tool_msgs=0) 
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=8136b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-q] // src/order/resolve.ts
+import { Clock } from "../runtime/clo..."
+  > "[probe munririq-p] // src/order/resolve.ts
+import { Clock } from "../runtime/clo..."
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=8136b, tools=0b, tool_msgs=0) 
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=8136b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-s] // src/order/resolve.ts
+import { Clock } from "../runtime/clo..."
+  > "[probe munririq-r] // src/order/resolve.ts
+import { Clock } from "../runtime/clo..."
+  prompt=2096 tokens, max_gen=192, ctx=262144
+  prompt=2096 tokens, max_gen=192, ctx=262144
+  prompt=2096 tokens, max_gen=192, ctx=262144
+  prompt=2096 tokens, max_gen=192, ctx=262144
+  <- 2096+192 tokens streamed [prefill: 478.0 tok/s (9 cached / 2096 total), decode: 26.2 tok/s] [length]
+  <- 2096+192 tokens streamed [prefill: 478.0 tok/s (9 cached / 2096 total), decode: 28.5 tok/s] [length]
+  <- 2096+192 tokens streamed [prefill: 478.1 tok/s (9 cached / 2096 total), decode: 27.1 tok/s] [length]
+  <- 2096+192 tokens streamed [prefill: 478.5 tok/s (9 cached / 2096 total), decode: 27.7 tok/s] [length]
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=15856b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-t] // src/order/resolve.ts
+import { Clock } from "../runtime/clo..."
+  prompt=4087 tokens, max_gen=192, ctx=262144
+  <- 4087+192 tokens streamed [prefill: 457.1 tok/s (9 cached / 4087 total), decode: 30.1 tok/s] [length]
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=15682b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-t] // src/order/resolve.ts
+import { Clock } from "../runtime/clo..."
+  prompt=4052 tokens, max_gen=192, ctx=262144
+  <- 4052+192 tokens streamed [prefill: 2.8 tok/s (4027 cached / 4052 total), decode: 36.6 tok/s] [length]
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=15856b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-w] // src/order/resolve.ts
+import { Clock } from "../runtime/clo..."
+  prompt=4087 tokens, max_gen=192, ctx=262144
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=15856b, tools=0b, tool_msgs=0) 
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=15856b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-u] // src/order/resolve.ts
+import { Clock } from "../runtime/clo..."
+  > "[probe munririq-x] // src/order/resolve.ts
+import { Clock } from "../runtime/clo..."
+  prompt=4087 tokens, max_gen=192, ctx=262144
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=15856b, tools=0b, tool_msgs=0) 
+  prompt=4087 tokens, max_gen=192, ctx=262144
+  > "[probe munririq-v] // src/order/resolve.ts
+import { Clock } from "../runtime/clo..."
+  prompt=4087 tokens, max_gen=192, ctx=262144
+  <- 4087+192 tokens streamed [prefill: 456.7 tok/s (9 cached / 4087 total), decode: 28.6 tok/s] [length]
+  <- 4087+192 tokens streamed [prefill: 457.0 tok/s (9 cached / 4087 total), decode: 29.3 tok/s] [length]
+  <- 4087+192 tokens streamed [prefill: 456.7 tok/s (9 cached / 4087 total), decode: 27.1 tok/s] [length]
+  <- 4087+192 tokens streamed [prefill: 458.0 tok/s (9 cached / 4087 total), decode: 30.4 tok/s] [length]
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=31773b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-y] // src/order/resolve.ts
+import { Clock } from "../runtime/clo..."
+  prompt=8272 tokens, max_gen=192, ctx=262144
+  <- 8272+192 tokens streamed [prefill: 434.3 tok/s (9 cached / 8272 total), decode: 27.5 tok/s] [length]
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=31599b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-y] // src/order/resolve.ts
+import { Clock } from "../runtime/clo..."
+  prompt=8237 tokens, max_gen=192, ctx=262144
+  <- 8237+192 tokens streamed [prefill: 1.3 tok/s (8212 cached / 8237 total), decode: 36.3 tok/s] [length]
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=31774b, tools=0b, tool_msgs=0) 
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=31774b, tools=0b, tool_msgs=0) 
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=31774b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-12] // src/order/resolve.ts
+import { Clock } from "../runtime/cl..."
+  > "[probe munririq-11] // src/order/resolve.ts
+import { Clock } from "../runtime/cl..."
+  prompt=8273 tokens, max_gen=192, ctx=262144
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=31773b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-10] // src/order/resolve.ts
+import { Clock } from "../runtime/cl..."
+  prompt=8273 tokens, max_gen=192, ctx=262144
+  > "[probe munririq-z] // src/order/resolve.ts
+import { Clock } from "../runtime/clo..."
+  prompt=8273 tokens, max_gen=192, ctx=262144
+  prompt=8272 tokens, max_gen=192, ctx=262144
+  <- 8273+192 tokens streamed [prefill: 434.5 tok/s (9 cached / 8273 total), decode: 25.6 tok/s] [length]
+  <- 8273+192 tokens streamed [prefill: 433.9 tok/s (10 cached / 8273 total), decode: 26.3 tok/s] [length]
+  <- 8272+192 tokens streamed [prefill: 433.8 tok/s (9 cached / 8272 total), decode: 27.7 tok/s] [length]
+  <- 8273+192 tokens streamed [prefill: 433.7 tok/s (9 cached / 8273 total), decode: 27.7 tok/s] [length]
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=62627b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-13] // src/order/resolve.ts
+import { Clock } from "../runtime/cl..."
+  prompt=16311 tokens, max_gen=192, ctx=262144
+  <- 16311+192 tokens streamed [prefill: 427.7 tok/s (10 cached / 16311 total), decode: 26.8 tok/s] [length]
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=62453b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-13] // src/order/resolve.ts
+import { Clock } from "../runtime/cl..."
+  prompt=16276 tokens, max_gen=192, ctx=262144
+  <- 16276+192 tokens streamed [prefill: 0.7 tok/s (16251 cached / 16276 total), decode: 35.7 tok/s] [length]
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=62627b, tools=0b, tool_msgs=0) 
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=62627b, tools=0b, tool_msgs=0) 
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=62627b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-14] // src/order/resolve.ts
+import { Clock } from "../runtime/cl..."
+  > "[probe munririq-15] // src/order/resolve.ts
+import { Clock } from "../runtime/cl..."
+  prompt=16311 tokens, max_gen=192, ctx=262144
+  prompt=16311 tokens, max_gen=192, ctx=262144
+  > "[probe munririq-16] // src/order/resolve.ts
+import { Clock } from "../runtime/cl..."
+  prompt=16311 tokens, max_gen=192, ctx=262144
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=62627b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-17] // src/order/resolve.ts
+import { Clock } from "../runtime/cl..."
+  prompt=16311 tokens, max_gen=192, ctx=262144
+  <- 16311+192 tokens streamed [prefill: 427.5 tok/s (10 cached / 16311 total), decode: 26.9 tok/s] [length]
+  <- 16311+192 tokens streamed [prefill: 427.7 tok/s (10 cached / 16311 total), decode: 25.3 tok/s] [length]
+  <- 16311+192 tokens streamed [prefill: 427.5 tok/s (10 cached / 16311 total), decode: 27.6 tok/s] [length]
+  <- 16311+192 tokens streamed [prefill: 427.4 tok/s (10 cached / 16311 total), decode: 25.6 tok/s] [length]
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=125788b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-18] // src/order/resolve.ts
+import { Clock } from "../runtime/cl..."
+  prompt=32766 tokens, max_gen=192, ctx=262144
+  <- 32766+192 tokens streamed [prefill: 419.0 tok/s (10 cached / 32766 total), decode: 26.9 tok/s] [length]
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=125614b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-18] // src/order/resolve.ts
+import { Clock } from "../runtime/cl..."
+  prompt=32731 tokens, max_gen=192, ctx=262144
+  <- 32731+192 tokens streamed [prefill: 0.3 tok/s (32706 cached / 32731 total), decode: 34.4 tok/s] [length]
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=125788b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-19] // src/order/resolve.ts
+import { Clock } from "../runtime/cl..."
+  prompt=32766 tokens, max_gen=192, ctx=262144
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=125788b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-1a] // src/order/resolve.ts
+import { Clock } from "../runtime/cl..."
+  prompt=32767 tokens, max_gen=192, ctx=262144
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=125788b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-1b] // src/order/resolve.ts
+import { Clock } from "../runtime/cl..."
+  prompt=32767 tokens, max_gen=192, ctx=262144
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=125788b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-1c] // src/order/resolve.ts
+import { Clock } from "../runtime/cl..."
+  prompt=32767 tokens, max_gen=192, ctx=262144
+  <- 32766+192 tokens streamed [prefill: 419.4 tok/s (10 cached / 32766 total), decode: 25.3 tok/s] [length]
+  <- 32767+192 tokens streamed [prefill: 419.4 tok/s (10 cached / 32767 total), decode: 27.3 tok/s] [length]
+  <- 32767+192 tokens streamed [prefill: 419.4 tok/s (11 cached / 32767 total), decode: 26.8 tok/s] [length]
+  <- 32767+192 tokens streamed [prefill: 419.4 tok/s (11 cached / 32767 total), decode: 28.6 tok/s] [length]
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=251573b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-1d] // src/order/resolve.ts
+import { Clock } from "../runtime/cl..."
+  prompt=65668 tokens, max_gen=192, ctx=262144
+  <- 65668+192 tokens streamed [prefill: 409.3 tok/s (11 cached / 65668 total), decode: 24.4 tok/s] [length]
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=251399b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-1d] // src/order/resolve.ts
+import { Clock } from "../runtime/cl..."
+  prompt=65633 tokens, max_gen=192, ctx=262144
+  <- 65633+192 tokens streamed [prefill: 0.2 tok/s (65608 cached / 65633 total), decode: 32.5 tok/s] [length]
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=251573b, tools=0b, tool_msgs=0) 
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=251573b, tools=0b, tool_msgs=0) 
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=251573b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-1g] // src/order/resolve.ts
+import { Clock } from "../runtime/cl..."
+  > "[probe munririq-1f] // src/order/resolve.ts
+import { Clock } from "../runtime/cl..."
+  > "[probe munririq-1e] // src/order/resolve.ts
+import { Clock } from "../runtime/cl..."
+  prompt=65668 tokens, max_gen=192, ctx=262144
+  prompt=65668 tokens, max_gen=192, ctx=262144
+  prompt=65668 tokens, max_gen=192, ctx=262144
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=251573b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-1h] // src/order/resolve.ts
+import { Clock } from "../runtime/cl..."
+  prompt=65668 tokens, max_gen=192, ctx=262144
+  <- 65668+192 tokens streamed [prefill: 409.2 tok/s (11 cached / 65668 total), decode: 24.8 tok/s] [length]
+  <- 65668+192 tokens streamed [prefill: 409.3 tok/s (11 cached / 65668 total), decode: 24.7 tok/s] [length]
+  <- 65668+192 tokens streamed [prefill: 408.8 tok/s (11 cached / 65668 total), decode: 25.6 tok/s] [length]
+  <- 65668+192 tokens streamed [prefill: 407.6 tok/s (11 cached / 65668 total), decode: 23.9 tok/s] [length]
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=501614b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-1i] // src/order/resolve.ts
+import { Clock } from "../runtime/cl..."
+  prompt=131083 tokens, max_gen=192, ctx=262144
+  <- 131083+192 tokens streamed [prefill: 394.0 tok/s (11 cached / 131083 total), decode: 23.2 tok/s] [length]
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=501440b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-1i] // src/order/resolve.ts
+import { Clock } from "../runtime/cl..."
+  prompt=131048 tokens, max_gen=192, ctx=262144
+  <- 131048+192 tokens streamed [prefill: 0.1 tok/s (131023 cached / 131048 total), decode: 29.0 tok/s] [length]
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=501614b, tools=0b, tool_msgs=0) 
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=501614b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-1m] // src/order/resolve.ts
+import { Clock } from "../runtime/cl..."
+  > "[probe munririq-1j] // src/order/resolve.ts
+import { Clock } from "../runtime/cl..."
+  prompt=131083 tokens, max_gen=192, ctx=262144
+  prompt=131083 tokens, max_gen=192, ctx=262144
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=501614b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-1l] // src/order/resolve.ts
+import { Clock } from "../runtime/cl..."
+  prompt=131083 tokens, max_gen=192, ctx=262144
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=501614b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-1k] // src/order/resolve.ts
+import { Clock } from "../runtime/cl..."
+  prompt=131083 tokens, max_gen=192, ctx=262144
+  <- 131083+192 tokens streamed [prefill: 394.0 tok/s (11 cached / 131083 total), decode: 23.2 tok/s] [length]
+  <- 131083+192 tokens streamed [prefill: 394.0 tok/s (11 cached / 131083 total), decode: 24.4 tok/s] [length]
+  <- 131083+192 tokens streamed [prefill: 394.1 tok/s (11 cached / 131083 total), decode: 23.4 tok/s] [length]
+  <- 131083+192 tokens streamed [prefill: 394.1 tok/s (11 cached / 131083 total), decode: 24.9 tok/s] [length]
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=979094b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-1n] // src/order/resolve.ts
+import { Clock } from "../runtime/cl..."
+  prompt=255834 tokens, max_gen=192, ctx=262144
+  <- 255834+192 tokens streamed [prefill: 369.6 tok/s (11 cached / 255834 total), decode: 18.9 tok/s] [length]
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=978920b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-1n] // src/order/resolve.ts
+import { Clock } from "../runtime/cl..."
+  prompt=255799 tokens, max_gen=192, ctx=262144
+  <- 255799+192 tokens streamed [prefill: 0.0 tok/s (255774 cached / 255799 total), decode: 24.7 tok/s] [length]
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=979094b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-1q] // src/order/resolve.ts
+import { Clock } from "../runtime/cl..."
+  prompt=255834 tokens, max_gen=192, ctx=262144
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=979094b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-1o] // src/order/resolve.ts
+import { Clock } from "../runtime/cl..."
+  prompt=255834 tokens, max_gen=192, ctx=262144
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=979094b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-1r] // src/order/resolve.ts
+import { Clock } from "../runtime/cl..."
+  prompt=255834 tokens, max_gen=192, ctx=262144
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=979094b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-1p] // src/order/resolve.ts
+import { Clock } from "../runtime/cl..."
+  prompt=255834 tokens, max_gen=192, ctx=262144
+  <- 255834+192 tokens streamed [prefill: 369.6 tok/s (11 cached / 255834 total), decode: 19.5 tok/s] [length]
+  <- 255834+192 tokens streamed [prefill: 369.6 tok/s (11 cached / 255834 total), decode: 19.5 tok/s] [length]
+  <- 255834+192 tokens streamed [prefill: 369.6 tok/s (11 cached / 255834 total), decode: 20.8 tok/s] [length]
+  <- 255834+192 tokens streamed [prefill: 369.7 tok/s (11 cached / 255834 total), decode: 20.3 tok/s] [length]
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=236b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-1s] Write a TypeScript function `retryWithBackoff<T>(fn, options..."
+  prompt=60 tokens, max_gen=192, ctx=262144
+  <- 60+192 tokens streamed [prefill: 114.7 tok/s (11 cached / 60 total), decode: 34.6 tok/s] [length]
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=236b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-1t] Write a TypeScript function `retryWithBackoff<T>(fn, options..."
+  prompt=60 tokens, max_gen=192, ctx=262144
+  <- 60+192 tokens streamed [prefill: 135.5 tok/s (11 cached / 60 total), decode: 37.6 tok/s] [length]
+POST /v1/chat/completions (1 msgs, max_tokens=192, temp=0.00, top_p=1.00, top_k=0, stream=true, thinking=true, sys=0b, user=236b, tools=0b, tool_msgs=0) 
+  > "[probe munririq-1u] Write a TypeScript function `retryWithBackoff<T>(fn, options..."
+  prompt=60 tokens, max_gen=192, ctx=262144
+  <- 60+192 tokens streamed [prefill: 136.0 tok/s (11 cached / 60 total), decode: 35.8 tok/s] [length]
