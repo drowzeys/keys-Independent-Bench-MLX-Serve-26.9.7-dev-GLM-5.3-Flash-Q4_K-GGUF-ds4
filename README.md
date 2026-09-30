@@ -63,7 +63,7 @@ Same harness, rungs and machine as the companion [Qwen 3.8 Flash-Next run](https
 
 - Decode stays at 26–30 tok/s from 2k through 33k with thinking on, and falls to 19 tok/s at 256k (about −30%).
 - Prefill is roughly flat at 370–470 tok/s across the whole ladder, so TTFT scales linearly and a full 256k prompt takes about 11.5 minutes.
-- **MTP is active even though the server says it isn't.** The startup log prints `has_mtp=false`, and `/v1/models` reports `mtp_loaded:false`, because `ds4_engine_has_mtp()` only checks for a sidecar MTP file. GLM's MTP head is embedded in the GGUF and is tracked separately (`glm_mtp`). The scheduler engages it through `mtpDraftTokens()`, which returns 2, and llmprobe measured 1.68–1.96 tok/step.
+- **MTP is active even though the server says it isn't.** The startup log prints `has_mtp=false`, and `/v1/models` reports `mtp_loaded:false`, because `ds4_engine_has_mtp()` only checks for a sidecar MTP file. GLM's MTP head is embedded in the GGUF and is tracked separately (`glm_mtp`). The scheduler engages it through `mtpDraftTokens()`, which returns 2, and llmprobe measured 1.68–1.96 tok/step. [`patches/ds4-embedded-mtp-reporting.patch`](patches/ds4-embedded-mtp-reporting.patch) is a 6-line fix on the Zig side (ds4 itself untouched). With it applied, the log shows `has_mtp=true, draft_tokens=2` and `/v1/models` shows `mtp_loaded:true`. It only corrects the reporting: speed is unchanged (41.6 tok/s on a predictable prompt, versus 41.0 in the bench).
 - ds4 caps GLM speculation at **2 draft tokens** (the GLM spec cycle is written for `limit <= 2`). That caps it at 3 tok/step. The measured ~1.7 tok/step means roughly 35% of drafts are accepted.
 - **Concurrency:** ds4 forces one slot, so every ×4 burst is marked `serialized` (0.25 efficiency). Aggregate throughput under 4 concurrent requests is about a quarter of a single stream, because the requests wait in a queue.
 - **Auto-context misestimates this GGUF.** Without `--ctx-size`, mlx-serve's memory sizer picked **13,312 tokens** ("85% of the 16,730-token memory ceiling"). It appears to bill a dense KV cache, but ds4's compact DSA cache is only ~0.37 GiB per 32k rows. The explicit `--ctx-size 262144` loaded cleanly and ran the full ladder with RSS steady at ~178 GB.
@@ -79,6 +79,7 @@ Same harness, rungs and machine as the companion [Qwen 3.8 Flash-Next run](https
 - [`raw/llmprobe-report.json`](raw/llmprobe-report.json): llmprobe run record
 - [`raw/llmprobe-report-card.html`](raw/llmprobe-report-card.html): llmprobe report card (download and open locally)
 - [`raw/server-startup.log`](raw/server-startup.log): mlx-serve startup log for this run (engine, context, concurrency, MTP lines)
+- [`patches/ds4-embedded-mtp-reporting.patch`](patches/ds4-embedded-mtp-reporting.patch): MTP status reporting fix against `933566c`
 
 ## Recipe: re-create for validation
 

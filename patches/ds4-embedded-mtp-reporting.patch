@@ -1,0 +1,30 @@
+diff --git a/src/arch/ds4.zig b/src/arch/ds4.zig
+index 9c12e4e..e900e8b 100644
+--- a/src/arch/ds4.zig
++++ b/src/arch/ds4.zig
+@@ -335,7 +335,10 @@ pub const Ds4Engine = struct {
+     }
+ 
+     pub fn hasMtp(self: *Ds4Engine) bool {
+-        return ffi.ds4_engine_has_mtp(self.handle);
++        // `ds4_engine_has_mtp` only sees a sidecar head (`mtp_ready`); an MTP
++        // head embedded in the GGUF (GLM `glm_mtp`) is reported through the
++        // draft count instead, the same gate the scheduler engages on.
++        return ffi.ds4_engine_has_mtp(self.handle) or self.mtpDraftTokens() > 1;
+     }
+ 
+     pub fn mtpDraftTokens(self: *Ds4Engine) c_int {
+diff --git a/src/server.zig b/src/server.zig
+index 23540aa..086946d 100644
+--- a/src/server.zig
++++ b/src/server.zig
+@@ -6556,7 +6556,8 @@ fn renderModelEntry(
+         const arch_label: []const u8 = if (entry.arch_hint.len > 0) entry.arch_hint else config.model_type;
+         const model_id: []const u8 = if (entry.id.len > 0) entry.id else config.model_type;
+         const drafter_loaded = entry.drafter != null or entry.dflash != null;
+-        const mtp_loaded = entry.mtp != null;
++        const mtp_loaded = entry.mtp != null or
++            (if (entry.ds4_engine) |e| e.hasMtp() else false);
+         const drafter_path_json = if (drafter_loaded)
+             try jsonEscape(allocator, entry.drafter_path)
+         else
